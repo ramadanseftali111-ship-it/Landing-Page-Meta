@@ -1368,7 +1368,9 @@ function validateForm() {
             
             // Teşekkür kartını göster + Meta Pixel tetikle
             var fiyatNumeric = parseFloat(tutar.replace(/[^0-9]/g, '')) || 0;
+            console.log('🔍 DEBUG: showSuccessModal çağrılıyor, fiyat:', fiyatNumeric);
             showSuccessModal(fiyatNumeric);
+            console.log('🔍 DEBUG: showSuccessModal çağrıldı!');
             
             // ========== MAKE.COM OTOMATİK GÖNDERİM KAPALI ==========
             // Sipariş artık otomatik olarak Make.com'a gönderilmiyor
