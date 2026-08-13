@@ -164,30 +164,6 @@ function updateBorder(selectedId) {
     if (typeof toggleOptions === 'function') {
         toggleOptions(selectedId);
     }
-    
-    // 🎯 META PIXEL: AddToCart eventi (Paket seçildiğinde)
-    if (typeof fbq !== 'undefined') {
-        try {
-            var fiyatElement = document.getElementById('urun' + selectedId + 'FiyatDisplay');
-            if (fiyatElement) {
-                var fiyatText = fiyatElement.textContent || '';
-                var fiyat = parseFloat(fiyatText.replace(/[^0-9]/g, '')) || 0;
-                var urunAdi = localStorage.getItem(getAdminKey('genel_urun_adi')) || 'Ürün';
-                
-                fbq('track', 'AddToCart', {
-                    content_name: urunAdi + ' - ' + selectedId + ' Adet',
-                    content_ids: ['urun_1_' + selectedId],
-                    content_type: 'product',
-                    value: fiyat,
-                    currency: 'TRY',
-                    num_items: selectedId
-                });
-                console.log('✅ Meta AddToCart - Paket:', selectedId, 'Adet, Fiyat:', fiyat);
-            }
-        } catch (e) {
-            console.log('Meta Pixel hata:', e);
-        }
-    }
 }
 </script>
 
@@ -986,11 +962,6 @@ function loadSiparisSeridiColors() {
 window.onload = function() {
     loadSavedImages();
     loadSavedData();
-    
-    // 🎯 META PIXEL: Varsayılan 1 Adet için AddToCart tetikle
-    setTimeout(function() {
-        updateBorder(1); // Border güncelle + Meta Pixel tetikle
-    }, 500);
     
     // 1 saniye sonra tekrar yükle (emin olmak için)
     setTimeout(function() {
